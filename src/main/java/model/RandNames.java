@@ -1,16 +1,19 @@
 package model;
 
-import java.lang.reflect.Array;
-
 public class RandNames {
-    private Array[] randNames;
 
-    public Array[] getRandNames() {
-        return randNames;
+    private String name;
+
+    public RandNames(String name){
+        this.name = name;
     }
 
-    public void setRandNames(Array[] randNames) {
-        this.randNames = randNames;
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
 

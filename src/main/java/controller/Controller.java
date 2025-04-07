@@ -7,6 +7,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 public class Controller {
+
     static String SEPERATOR = ", ";
 
     @FXML
@@ -30,6 +31,8 @@ public class Controller {
             String setTeilnehmer = showTeilnehmer.getText();
             showTeilnehmer.setText(setTeilnehmer + addTeilnehmer+SEPERATOR);
         }
+
+
 
         teilnehmer.setText("");
         teilnehmer.requestFocus();
