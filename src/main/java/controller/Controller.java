@@ -46,15 +46,17 @@ public class Controller {
 
     @FXML
     protected void onClickStartBtn() {
-            int rand = dao.randNamesList.size();
-            System.out.println(rand);
-            int winnerNr = getRandomNumberUsingInts(1, rand);
+        int rand = dao.getListSize();
+        System.out.println(rand);
+            int winnerNr = getRandomNumber(rand);
             System.out.println(winnerNr);
-            dao.getNameOnList(winnerNr);
+            String winner = dao.getNameOnList(winnerNr);
+            System.out.println(winner);
     }
 
-    public int getRandomNumberUsingInts(int min, int max) {
+    public int getRandomNumber(int max) {
         Random random = new Random();
-        return random.nextInt((max - min) + 1) + min;
+        return random.nextInt(max);
     }
+
 }

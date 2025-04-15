@@ -20,4 +20,13 @@ public class RandNamesDAO {
         String name = randNamesList.get(randNr).getName();
         return name;
     }
+    // Gibt die vollständige Namensliste zurück (z. B. für Anzeige oder Logik)
+    public List<RandNames> getAllNames() {
+        return randNamesList;
+    }
+
+    // Optional: Größe der Liste zurückgeben
+    public int getListSize() {
+        return randNamesList.size();
+    }
 }
