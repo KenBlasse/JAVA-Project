@@ -14,4 +14,9 @@ public class RandNamesDAO {
             System.out.println(e.getMessage());
         }
     }
+
+    public String getNameOnList(int randNr){
+        String name = randNamesList.get(randNr).getName();
+        return name;
+    }
 }

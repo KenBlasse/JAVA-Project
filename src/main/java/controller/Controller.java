@@ -5,7 +5,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import model.RandNames;
+
+import java.util.Random;
+import java.util.stream.IntStream;
 
 public class Controller {
 
@@ -46,5 +48,16 @@ public class Controller {
     protected void onClickStartBtn() {
             int rand = dao.randNamesList.size();
             System.out.println(rand);
+            int winnerNr = IntStream.of(getRandomNumberUsingInts(1,rand)).sum();
+            System.out.println(winnerNr);
+            dao.getNameOnList(winnerNr);
+    }
+
+    public int getRandomNumberUsingInts(int min, int max) {
+        Random random = new Random();
+        int asInt = random.ints(min, max)
+                .findFirst()
+                .getAsInt();
+        return asInt;
     }
 }
