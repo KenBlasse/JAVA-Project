@@ -11,6 +11,7 @@ public class Controller {
 
     static String SEPERATOR = ", ";
     private RandNamesDAO dao = new RandNamesDAO();
+    private RandNamesDAO tempDao = new RandNamesDAO();
 
     @FXML
     private Label winnerLabel, teilnehmerLabel;
@@ -41,7 +42,9 @@ public class Controller {
         teilnehmer.requestFocus();
     }
 
+    @FXML
     protected void onClickStartBtn() {
-
+            int rand = dao.randNamesList.size();
+            System.out.println(rand);
     }
 }
