@@ -5,10 +5,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import model.RandNames;
 
 public class Controller {
 
     static String SEPERATOR = ", ";
+    private RandNamesDAO dao = new RandNamesDAO();
 
     @FXML
     private Label winnerLabel, teilnehmerLabel;
@@ -32,7 +34,11 @@ public class Controller {
             showTeilnehmer.setText(setTeilnehmer + addTeilnehmer+SEPERATOR);
         }
 
-
+        if (showWinner.getText().isEmpty()) {
+            dao.addNameList(addTeilnehmer);
+        }else{
+            dao.addNameList(addTeilnehmer);
+        }
 
         teilnehmer.setText("");
         teilnehmer.requestFocus();
