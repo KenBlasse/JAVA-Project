@@ -15,7 +15,6 @@
     </padding>
    <children>
       <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="40.0">
-         <children>
             <Label fx:id="teilnehmerLabel" text="Teilnehmer: ">
                <HBox.margin>
                   <Insets />
@@ -32,7 +31,6 @@
                   <Insets />
                </opaqueInsets>
             </TextArea>
-         </children>
       </HBox>
       <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" snapToPixel="false" spacing="53.0">
          <children>
@@ -48,7 +46,6 @@
          </children>
       </HBox>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-         <children>
             <Button fx:id="onClickStartBtn" mnemonicParsing="false" text="Start" />
             <Button fx:id="addBtn" mnemonicParsing="false" onAction="#onClickAddBtn" text="Hinzufügen">
                <HBox.margin>
@@ -60,7 +57,6 @@
                   <Insets left="10.0" />
                </HBox.margin>
             </TextField>
-         </children>
       </HBox>
    </children>
 </VBox>
