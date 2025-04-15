@@ -34,11 +34,8 @@ public class Controller {
             showTeilnehmer.setText(setTeilnehmer + addTeilnehmer+SEPERATOR);
         }
 
-        if (showWinner.getText().isEmpty()) {
-            dao.addNameList(addTeilnehmer);
-        }else{
-            dao.addNameList(addTeilnehmer);
-        }
+        if (showWinner.getText().isEmpty()) dao.addNameList(addTeilnehmer);
+        else dao.addNameList(addTeilnehmer);
 
         teilnehmer.setText("");
         teilnehmer.requestFocus();
