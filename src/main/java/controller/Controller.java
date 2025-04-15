@@ -48,16 +48,13 @@ public class Controller {
     protected void onClickStartBtn() {
             int rand = dao.randNamesList.size();
             System.out.println(rand);
-            int winnerNr = IntStream.of(getRandomNumberUsingInts(1,rand)).sum();
+            int winnerNr = getRandomNumberUsingInts(1, rand);
             System.out.println(winnerNr);
             dao.getNameOnList(winnerNr);
     }
 
     public int getRandomNumberUsingInts(int min, int max) {
         Random random = new Random();
-        int asInt = random.ints(min, max)
-                .findFirst()
-                .getAsInt();
-        return asInt;
+        return random.nextInt((max - min) + 1) + min;
     }
 }
