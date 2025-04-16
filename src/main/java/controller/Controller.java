@@ -1,10 +1,7 @@
 package controller;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.util.Random;
 
@@ -57,6 +54,11 @@ public class Controller {
             String setWinner = showWinner.getText();
             showWinner.setText(winner + SEPERATOR + setWinner);
         }
+        Alert winInfo = new Alert(Alert.AlertType.INFORMATION);
+        winInfo.setTitle("Winner");
+        winInfo.setHeaderText("Gewonnen hat: ");
+        winInfo.setContentText(winner);
+        winInfo.showAndWait();
     }
 
     public int getRandomNumber(int max) {
