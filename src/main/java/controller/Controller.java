@@ -49,9 +49,15 @@ public class Controller {
         int rand = dao.getListSize();
         System.out.println(rand);
             int winnerNr = getRandomNumber(rand);
-            System.out.println(winnerNr);
+            // System.out.println(winnerNr);
             String winner = dao.getNameOnList(winnerNr);
-            System.out.println(winner);
+            // System.out.println(winner);
+        if (showWinner.getText().isEmpty()) {
+            showWinner.setText(winner+SEPERATOR);
+        }else {
+            String setWinner = showWinner.getText();
+            showWinner.setText(winner + setWinner+SEPERATOR);
+        }
     }
 
     public int getRandomNumber(int max) {
