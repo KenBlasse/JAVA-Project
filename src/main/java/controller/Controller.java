@@ -7,7 +7,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 import java.util.Random;
-import java.util.stream.IntStream;
 
 public class Controller {
 
@@ -19,7 +18,7 @@ public class Controller {
     private Label winnerLabel, teilnehmerLabel;
 
     @FXML
-    private Button onClickStartBtn, onClickAddBtn;
+    private Button startBtn, addBtn;
 
     @FXML
     private TextField teilnehmer;
@@ -53,10 +52,10 @@ public class Controller {
             String winner = dao.getNameOnList(winnerNr);
             // System.out.println(winner);
         if (showWinner.getText().isEmpty()) {
-            showWinner.setText(winner+SEPERATOR);
+            showWinner.setText(winner+ SEPERATOR);
         }else {
             String setWinner = showWinner.getText();
-            showWinner.setText(winner + setWinner+SEPERATOR);
+            showWinner.setText(winner + SEPERATOR + setWinner);
         }
     }
 
