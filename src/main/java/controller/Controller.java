@@ -1,6 +1,7 @@
 package controller;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 
 import java.util.Random;
@@ -10,12 +11,6 @@ public class Controller {
     static String SEPERATOR = ", ";
     private RandNamesDAO dao = new RandNamesDAO();
     private RandNamesDAO tempDao = new RandNamesDAO();
-
-    @FXML
-    private Label winnerLabel, teilnehmerLabel;
-
-    @FXML
-    private Button startBtn, addBtn;
 
     @FXML
     private TextField teilnehmer;
