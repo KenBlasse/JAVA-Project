@@ -10,7 +10,7 @@ import java.util.Random;
 
 public class Controller {
 
-    static String SEPERATOR = ", ";
+    static String SEPARATOR = ", ";
     final RandNamesDAO dao = new RandNamesDAO();
 
     @FXML
@@ -26,10 +26,10 @@ public class Controller {
     protected void onClickAddBtn() {
         String addTeilnehmer = teilnehmer.getText();
         if (showTeilnehmer.getText().isEmpty()) {
-            showTeilnehmer.setText(addTeilnehmer + SEPERATOR);
+            showTeilnehmer.setText(addTeilnehmer + SEPARATOR);
         } else {
             String setTeilnehmer = showTeilnehmer.getText();
-            showTeilnehmer.setText(setTeilnehmer + addTeilnehmer + SEPERATOR);
+            showTeilnehmer.setText(setTeilnehmer + addTeilnehmer + SEPARATOR);
         }
 
         if (showWinner.getText().isEmpty()) dao.addNameList(addTeilnehmer);
@@ -42,11 +42,8 @@ public class Controller {
     @FXML
     protected void onClickStartBtn() {
         int rand = dao.getListSize();
-        System.out.println(rand);
         int winnerNr = getRandomNumber(rand);
-        // System.out.println(winnerNr);
         String winner = dao.getNameOnList(winnerNr);
-        // System.out.println(winner);
 
         if (showWinner.getText().contains(winner)) {
             Alert found = new Alert(Alert.AlertType.INFORMATION);
@@ -59,10 +56,10 @@ public class Controller {
             found.showAndWait();
         } else {
             if (showWinner.getText().isEmpty()) {
-                showWinner.setText(winner + SEPERATOR);
+                showWinner.setText(winner + SEPARATOR);
             } else {
                 String setWinner = showWinner.getText();
-                showWinner.setText(winner + SEPERATOR + setWinner);
+                showWinner.setText(winner + SEPARATOR + setWinner);
             }
             Alert winInfo = new Alert(Alert.AlertType.INFORMATION);
             winInfo.setTitle("\uD83C\uDF89Winner");
@@ -86,20 +83,24 @@ public class Controller {
         List<RandNames> geladeneNamen = dao.load();
         loaded.setText(dao.time);
         showTeilnehmer.clear();
+        showWinner.clear();
         dao.setAllNames(geladeneNamen);
         for (int j = 0; j < dao.getListSize(); j++) {
             String name = dao.getNameOnList(j);
             if (showTeilnehmer.getText().isEmpty()) {
-                showTeilnehmer.setText(name + SEPERATOR);
+                showTeilnehmer.setText(name + SEPARATOR);
             } else {
                 String setTeilnehmer = showTeilnehmer.getText();
-                showTeilnehmer.setText(setTeilnehmer + name + SEPERATOR);
+                showTeilnehmer.setText(setTeilnehmer + name + SEPARATOR);
             }
         }
     }
 
     @FXML
     protected void onClickResetBtn() {
+        showTeilnehmer.clear();
+        showWinner.clear();
+        loaded.setText(null);
     }
 
     public int getRandomNumber(int max) {

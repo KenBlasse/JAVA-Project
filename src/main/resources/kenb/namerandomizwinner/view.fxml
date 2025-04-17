@@ -9,40 +9,49 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="360.0" spacing="20.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
+<VBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="480.0" spacing="20.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
-      <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="40.0">
-            <Label fx:id="teilnehmerLabel" text="Teilnehmer: ">
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <Label fx:id="teilnehmerLabel" minWidth="-Infinity" prefWidth="150.0" text="Teilnehmer: ">
                <HBox.margin>
-                  <Insets />
+                  <Insets right="10.0" />
                </HBox.margin>
+         <font>
+            <Font size="24.0" />
+         </font>
             </Label>
-            <TextArea fx:id="showTeilnehmer" editable="false" prefHeight="200.0" prefWidth="200.0" promptText="Hier erscheinen die Teilnehmer">
+            <TextArea fx:id="showTeilnehmer" editable="false" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" promptText="Hier erscheinen die Teilnehmer" wrapText="true">
                <HBox.margin>
                   <Insets right="10.0" />
                </HBox.margin>
                <font>
-                  <Font size="10.0" />
+                  <Font size="18.0" />
                </font>
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
             </TextArea>
       </HBox>
-      <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" snapToPixel="false" spacing="53.0">
-            <Label fx:id="winnerLabel" text="Gewinner:" />
-            <TextArea fx:id="showWinner" editable="false" prefHeight="200.0" prefWidth="200.0" promptText="hier steht der Gewinner/die Gewinner">
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" snapToPixel="false">
+            <Label fx:id="winnerLabel" minWidth="-Infinity" prefWidth="150.0" text="Gewinner:">
+         <font>
+            <Font size="24.0" />
+         </font>
+         <HBox.margin>
+            <Insets right="10.0" />
+         </HBox.margin></Label>
+            <TextArea fx:id="showWinner" editable="false" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" promptText="hier steht der Gewinner/die Gewinner" wrapText="true">
                <HBox.margin>
                   <Insets right="10.0" />
                </HBox.margin>
                <font>
-                  <Font size="10.0" />
+                  <Font size="18.0" />
                </font>
             </TextArea>
       </HBox>
-      <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
+      <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" spacing="30.0">
             <Button fx:id="startBtn" mnemonicParsing="false" onAction="#onClickStartBtn" text="Start" />
             <Button fx:id="addBtn" mnemonicParsing="false" onAction="#onClickAddBtn" text="Hinzufügen">
                <HBox.margin>
@@ -55,7 +64,7 @@
                </HBox.margin>
             </TextField>
       </HBox>
-      <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" VBox.vgrow="NEVER">
+      <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" spacing="30.0" VBox.vgrow="NEVER">
             <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#onClickSaveBtn" text="Speichern">
                <HBox.margin>
                   <Insets right="10.0" />
@@ -68,6 +77,12 @@
             </Button>
             <Button fx:id="resetBtn" mnemonicParsing="false" onAction="#onClickResetBtn" text="Reset" />
       </HBox>
-   <Label fx:id="load" text="geladene Ziehung:" />
-   <Label fx:id="loaded" />
+   <Label fx:id="load" text="geladene Ziehung:" textAlignment="CENTER" underline="true">
+      <font>
+         <Font size="17.0" />
+      </font></Label>
+   <Label fx:id="loaded">
+      <font>
+         <Font size="17.0" />
+      </font></Label>
 </VBox>

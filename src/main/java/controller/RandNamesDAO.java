@@ -29,7 +29,7 @@ public class RandNamesDAO {
         try {
             randNamesList.add(new RandNames(randName));
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.err.println(e.getMessage());
         }
     }
 
@@ -62,13 +62,13 @@ public class RandNamesDAO {
                 fileWriter.write(liste);
             }
         }catch (IOException e){
-            System.out.println("Fehler: "+ e.getMessage());
+            System.err.println("Fehler: "+ e.getMessage());
         }finally {
             if (fileWriter != null) {
                 try{
                     fileWriter.close();
                 }catch (IOException e){
-                    System.out.println("Fehler: "+ e.getMessage());
+                    System.err.println("Fehler: "+ e.getMessage());
                 }
             }
         }
