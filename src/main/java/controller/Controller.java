@@ -1,9 +1,12 @@
 package controller;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 
 import java.util.Random;
+
+import static java.util.Arrays.compare;
 
 public class Controller {
 
@@ -37,10 +40,10 @@ public class Controller {
     protected void onClickStartBtn() {
         int rand = dao.getListSize();
         System.out.println(rand);
-            int winnerNr = getRandomNumber(rand);
-            // System.out.println(winnerNr);
-            String winner = dao.getNameOnList(winnerNr);
-            // System.out.println(winner);
+        int winnerNr = getRandomNumber(rand);
+        // System.out.println(winnerNr);
+        String winner = dao.getNameOnList(winnerNr);
+        // System.out.println(winner);
         if (showWinner.getText().contains(winner)){
             Alert found = new Alert(Alert.AlertType.INFORMATION);
             found.setTitle("Schade");
@@ -54,11 +57,15 @@ public class Controller {
                 showWinner.setText(winner + SEPERATOR + setWinner);
             }
             Alert winInfo = new Alert(Alert.AlertType.INFORMATION);
-            winInfo.setTitle("Winner");
-            winInfo.setHeaderText("Gewonnen hat: ");
-            winInfo.setContentText(winner);
-            winInfo.showAndWait();
-        }
+            winInfo.setTitle("\uD83C\uDF89Winner");
+            winInfo.setHeaderText(null);
+
+            Label content = new Label("Gewonnen hat:\n"+winner);
+            content.setStyle("-fx-font-size: 25px; -fx-text-fill: blue;");
+            content.setWrapText(true);
+                winInfo.getDialogPane().setContent(content);
+                winInfo.showAndWait();
+            }
     }
 
     public int getRandomNumber(int max) {
