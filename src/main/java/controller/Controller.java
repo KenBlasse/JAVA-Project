@@ -63,12 +63,23 @@ public class Controller {
             winInfo.setHeaderText(null);
 
             Label content = new Label("Gewonnen hat:\n"+winner);
-            content.setStyle("-fx-font-size: 25px; -fx-text-fill: blue;");
+            content.setStyle("-fx-font-size: 25px; -fx-text-fill: green;");
             content.setWrapText(true);
             winInfo.getDialogPane().setContent(content);
             winInfo.showAndWait();
         }
     }
+
+    @FXML
+    protected void onClickSaveBtn() {
+        dao.save();
+    }
+
+    @FXML
+    protected void onClickLoadBtn() {}
+
+    @FXML
+    protected void onClickResetBtn() {}
 
     public int getRandomNumber(int max) {
         Random random = new Random();
