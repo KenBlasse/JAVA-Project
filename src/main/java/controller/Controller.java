@@ -72,7 +72,6 @@ public class Controller {
         Alert winInfo = new Alert(Alert.AlertType.INFORMATION);
         winInfo.setTitle("\uD83C\uDF89Winner");
         winInfo.setHeaderText(null);
-
         Label content = new Label("Gewonnen hat:\n" + winner);
         content.setStyle("-fx-font-size: 25px; -fx-text-fill: green;");
         content.setWrapText(true);
