@@ -41,36 +41,43 @@ public class Controller {
 
     @FXML
     protected void onClickStartBtn() {
-        int rand = dao.getListSize();
-        int winnerNr = getRandomNumber(rand);
-        String winner = dao.getNameOnList(winnerNr);
 
-        if (showWinner.getText().contains(winner)) {
-            Alert found = new Alert(Alert.AlertType.INFORMATION);
-            found.setTitle("Schade");
-            found.setHeaderText(null);
-            Label alreadyWon = new Label(winner + " hat bereits gewonnen!");
-            alreadyWon.setStyle("-fx-font-size: 25px; -fx-text-fill: red;");
-            alreadyWon.setWrapText(true);
-            found.getDialogPane().setContent(alreadyWon);
-            found.showAndWait();
-        } else {
-            if (showWinner.getText().isEmpty()) {
-                showWinner.setText(winner + SEPARATOR);
-            } else {
-                String setWinner = showWinner.getText();
-                showWinner.setText(winner + SEPARATOR + setWinner);
-            }
-            Alert winInfo = new Alert(Alert.AlertType.INFORMATION);
-            winInfo.setTitle("\uD83C\uDF89Winner");
-            winInfo.setHeaderText(null);
-
-            Label content = new Label("Gewonnen hat:\n" + winner);
-            content.setStyle("-fx-font-size: 25px; -fx-text-fill: green;");
-            content.setWrapText(true);
-            winInfo.getDialogPane().setContent(content);
-            winInfo.showAndWait();
+        if (dao.getListSize() == 0 || showWinner.getText().split(SEPARATOR).length >= dao.getListSize()) {
+            Alert gameOver = new Alert(Alert.AlertType.INFORMATION);
+            gameOver.setTitle("Game Over");
+            gameOver.setHeaderText(null);
+            Label msg = new Label("Es wurden bereits alle Teilnehmer gezogen!");
+            msg.setStyle("-fx-font-size: 18px; -fx-text-fill: red;");
+            msg.setWrapText(true);
+            gameOver.getDialogPane().setContent(msg);
+            gameOver.showAndWait();
+            return;
         }
+
+        String winner;
+        do {
+            int rand = dao.getListSize();
+            int winnerNr = getRandomNumber(rand);
+            winner = dao.getNameOnList(winnerNr);
+        }
+        while (showWinner.getText().contains(winner));
+
+        if (showWinner.getText().isEmpty()){
+            showWinner.setText(winner + SEPARATOR);
+        }else{
+            String alreadyWon = showWinner.getText();
+            showWinner.setText(alreadyWon + winner + SEPARATOR);
+        }
+
+        Alert winInfo = new Alert(Alert.AlertType.INFORMATION);
+        winInfo.setTitle("\uD83C\uDF89Winner");
+        winInfo.setHeaderText(null);
+
+        Label content = new Label("Gewonnen hat:\n" + winner);
+        content.setStyle("-fx-font-size: 25px; -fx-text-fill: green;");
+        content.setWrapText(true);
+        winInfo.getDialogPane().setContent(content);
+        winInfo.showAndWait();
     }
 
     @FXML
