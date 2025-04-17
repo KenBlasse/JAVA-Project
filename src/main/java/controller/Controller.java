@@ -8,7 +8,7 @@ import java.util.Random;
 public class Controller {
 
     static String SEPERATOR = ", ";
-    private RandNamesDAO dao = new RandNamesDAO();
+    final RandNamesDAO dao = new RandNamesDAO();
 
     @FXML
     private TextField teilnehmer;
