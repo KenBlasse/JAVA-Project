@@ -1,12 +1,9 @@
 package controller;
 
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
 import javafx.scene.control.*;
 
 import java.util.Random;
-
-import static java.util.Arrays.compare;
 
 public class Controller {
 
@@ -44,10 +41,15 @@ public class Controller {
         // System.out.println(winnerNr);
         String winner = dao.getNameOnList(winnerNr);
         // System.out.println(winner);
+
         if (showWinner.getText().contains(winner)){
             Alert found = new Alert(Alert.AlertType.INFORMATION);
             found.setTitle("Schade");
-            found.setHeaderText(winner + " wurde bereits gezogen!");
+            found.setHeaderText(null);
+            Label alreadyWon = new Label(winner + " hat bereits gewonnen!");
+            alreadyWon.setStyle("-fx-font-size: 25px; -fx-text-fill: red;");
+            alreadyWon.setWrapText(true);
+            found.getDialogPane().setContent(alreadyWon);
             found.showAndWait();
         }else {
             if (showWinner.getText().isEmpty()) {
@@ -63,9 +65,9 @@ public class Controller {
             Label content = new Label("Gewonnen hat:\n"+winner);
             content.setStyle("-fx-font-size: 25px; -fx-text-fill: blue;");
             content.setWrapText(true);
-                winInfo.getDialogPane().setContent(content);
-                winInfo.showAndWait();
-            }
+            winInfo.getDialogPane().setContent(content);
+            winInfo.showAndWait();
+        }
     }
 
     public int getRandomNumber(int max) {
