@@ -68,4 +68,6 @@
             </Button>
             <Button fx:id="resetBtn" mnemonicParsing="false" onAction="#onClickResetBtn" text="Reset" />
       </HBox>
+   <Label fx:id="load" text="geladene Ziehung:" />
+   <Label fx:id="loaded" />
 </VBox>

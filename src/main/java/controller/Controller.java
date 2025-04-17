@@ -17,6 +17,9 @@ public class Controller {
     private TextArea showWinner, showTeilnehmer;
 
     @FXML
+    private Label loaded;
+
+    @FXML
     protected void onClickAddBtn() {
         String addTeilnehmer = teilnehmer.getText();
         if (showTeilnehmer.getText().isEmpty()) {
@@ -76,7 +79,21 @@ public class Controller {
     }
 
     @FXML
-    protected void onClickLoadBtn() {}
+    protected void onClickLoadBtn() {
+        dao.load();
+        loaded.setText(dao.getNameOnList(0));
+        System.out.println(dao.getNameOnList(0));
+        showTeilnehmer.setText("");
+        for (int j = 1; j < dao.getListSize(); j++) {
+            String name = dao.getNameOnList(j);
+            if (showTeilnehmer.getText().isEmpty()) {
+                showTeilnehmer.setText(name+SEPERATOR);
+            }else {
+                String setTeilnehmer = showTeilnehmer.getText();
+                showTeilnehmer.setText(setTeilnehmer + name+SEPERATOR);
+            }
+        }
+    }
 
     @FXML
     protected void onClickResetBtn() {}

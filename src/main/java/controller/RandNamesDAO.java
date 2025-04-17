@@ -1,8 +1,9 @@
 package controller;
 
-import javafx.scene.control.Alert;
 import model.RandNames;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -15,7 +16,7 @@ public class RandNamesDAO {
 
     private final String PATH = "save.csv";
 
-    private final String SEPARATOR = ",";
+    private final String SEPARATOR = ", ";
 
     public void addNameList(String randName) {
         try {
@@ -44,11 +45,14 @@ public class RandNamesDAO {
         FileWriter fileWriter = null;
         try{
             fileWriter = new FileWriter(PATH);
-            String liste = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd")) + SEPARATOR;
+            String liste;
+            liste= LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"))+SEPARATOR+System.lineSeparator();
+            fileWriter.write(liste);
             for (RandNames r : randNamesList) {
-                liste += r.getName() + SEPARATOR;
-
-            }fileWriter.write(liste);
+                String randName = r.getName();
+                liste = randName + SEPARATOR + System.lineSeparator();
+                fileWriter.write(liste);
+            }
         }catch (IOException e){
             System.out.println("Fehler: "+ e.getMessage());
         }finally {
@@ -60,5 +64,32 @@ public class RandNamesDAO {
                 }
             }
         }
+    }
+
+    ArrayList<RandNames> load(){
+        ArrayList<RandNames> list = new ArrayList<>();
+        FileReader fileReader = null;
+        try{
+            fileReader = new FileReader(PATH);
+
+            BufferedReader bReader = new BufferedReader(fileReader);
+
+            String readLine;
+
+            while ((readLine = bReader.readLine()) != null){
+            String [] line = readLine.split(SEPARATOR);
+            list.add(new RandNames(line[0]));
+            }
+        }catch (IOException e){
+            System.err.println("Fehler: "+ e.getMessage());
+        }finally {
+            if (fileReader != null) {
+                try {
+                    fileReader.close();
+                }catch (IOException e){
+                    System.err.println("Fehler: "+ e.getMessage());
+                }
+            }
+        }return list;
     }
 }
