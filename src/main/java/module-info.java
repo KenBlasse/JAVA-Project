@@ -11,6 +11,7 @@ module kenb.namerandomizwinner {
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
     requires java.sql;
+    requires annotations;
 
     opens kenb.namerandomizwinner to javafx.fxml;
     exports kenb.namerandomizwinner;

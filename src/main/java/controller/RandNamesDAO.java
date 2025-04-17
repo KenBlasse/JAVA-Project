@@ -11,8 +11,15 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.time.LocalDateTime.*;
+
+
 public class RandNamesDAO {
     List<RandNames> randNamesList = new ArrayList<>();
+
+    public String time = "";
+
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
 
     private final String PATH = "save.csv";
 
@@ -30,9 +37,10 @@ public class RandNamesDAO {
         String name = randNamesList.get(randNr).getName();
         return name;
     }
-    // Gibt die vollständige Namensliste zurück (z. B. für Anzeige oder Logik)
-    public List<RandNames> getAllNames() {
-        return randNamesList;
+    // Gibt die vollständige Namensliste zurück
+    public void setAllNames(List<RandNames> list) {
+        randNamesList.clear();
+        randNamesList.addAll(list);
     }
 
     // Optional: Größe der Liste zurückgeben
@@ -46,7 +54,7 @@ public class RandNamesDAO {
         try{
             fileWriter = new FileWriter(PATH);
             String liste;
-            liste= LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"))+SEPARATOR+System.lineSeparator();
+            liste= now().format(formatter)+SEPARATOR+System.lineSeparator();
             fileWriter.write(liste);
             for (RandNames r : randNamesList) {
                 String randName = r.getName();
@@ -66,30 +74,42 @@ public class RandNamesDAO {
         }
     }
 
-    ArrayList<RandNames> load(){
+    ArrayList<RandNames> load() {
         ArrayList<RandNames> list = new ArrayList<>();
         FileReader fileReader = null;
-        try{
-            fileReader = new FileReader(PATH);
 
+        try {
+            fileReader = new FileReader(PATH);
             BufferedReader bReader = new BufferedReader(fileReader);
 
-            String readLine;
-
-            while ((readLine = bReader.readLine()) != null){
-            String [] line = readLine.split(SEPARATOR);
-            list.add(new RandNames(line[0]));
+            // Erstes Lesen = Zeitstempelzeile
+            String ersteZeile = bReader.readLine();
+            if (ersteZeile != null && !ersteZeile.isEmpty()) {
+                String[] zeitLine = ersteZeile.split(SEPARATOR);
+                if (zeitLine.length > 0) {
+                    time = LocalDateTime.parse(zeitLine[0], formatter).format(formatter);
+                }
             }
-        }catch (IOException e){
-            System.err.println("Fehler: "+ e.getMessage());
-        }finally {
+
+            // Dann Teilnehmer einlesen
+            String readLine;
+            while ((readLine = bReader.readLine()) != null) {
+                String[] line = readLine.split(SEPARATOR);
+                list.add(new RandNames(line[0]));
+            }
+
+        } catch (IOException e) {
+            System.err.println("Fehler: " + e.getMessage());
+        } finally {
             if (fileReader != null) {
                 try {
                     fileReader.close();
-                }catch (IOException e){
-                    System.err.println("Fehler: "+ e.getMessage());
+                } catch (IOException e) {
+                    System.err.println("Fehler: " + e.getMessage());
                 }
             }
-        }return list;
+        }
+
+        return list;
     }
 }

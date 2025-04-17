@@ -2,7 +2,10 @@ package controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import model.RandNames;
 
+import java.util.List;
 import java.util.Random;
 
 public class Controller {
@@ -23,10 +26,10 @@ public class Controller {
     protected void onClickAddBtn() {
         String addTeilnehmer = teilnehmer.getText();
         if (showTeilnehmer.getText().isEmpty()) {
-            showTeilnehmer.setText(addTeilnehmer+SEPERATOR);
-        }else {
+            showTeilnehmer.setText(addTeilnehmer + SEPERATOR);
+        } else {
             String setTeilnehmer = showTeilnehmer.getText();
-            showTeilnehmer.setText(setTeilnehmer + addTeilnehmer+SEPERATOR);
+            showTeilnehmer.setText(setTeilnehmer + addTeilnehmer + SEPERATOR);
         }
 
         if (showWinner.getText().isEmpty()) dao.addNameList(addTeilnehmer);
@@ -45,7 +48,7 @@ public class Controller {
         String winner = dao.getNameOnList(winnerNr);
         // System.out.println(winner);
 
-        if (showWinner.getText().contains(winner)){
+        if (showWinner.getText().contains(winner)) {
             Alert found = new Alert(Alert.AlertType.INFORMATION);
             found.setTitle("Schade");
             found.setHeaderText(null);
@@ -54,7 +57,7 @@ public class Controller {
             alreadyWon.setWrapText(true);
             found.getDialogPane().setContent(alreadyWon);
             found.showAndWait();
-        }else {
+        } else {
             if (showWinner.getText().isEmpty()) {
                 showWinner.setText(winner + SEPERATOR);
             } else {
@@ -65,7 +68,7 @@ public class Controller {
             winInfo.setTitle("\uD83C\uDF89Winner");
             winInfo.setHeaderText(null);
 
-            Label content = new Label("Gewonnen hat:\n"+winner);
+            Label content = new Label("Gewonnen hat:\n" + winner);
             content.setStyle("-fx-font-size: 25px; -fx-text-fill: green;");
             content.setWrapText(true);
             winInfo.getDialogPane().setContent(content);
@@ -80,27 +83,27 @@ public class Controller {
 
     @FXML
     protected void onClickLoadBtn() {
-        dao.load();
-        loaded.setText(dao.getNameOnList(0));
-        System.out.println(dao.getNameOnList(0));
-        showTeilnehmer.setText("");
-        for (int j = 1; j < dao.getListSize(); j++) {
+        List<RandNames> geladeneNamen = dao.load();
+        loaded.setText(dao.time);
+        showTeilnehmer.clear();
+        dao.setAllNames(geladeneNamen);
+        for (int j = 0; j < dao.getListSize(); j++) {
             String name = dao.getNameOnList(j);
             if (showTeilnehmer.getText().isEmpty()) {
-                showTeilnehmer.setText(name+SEPERATOR);
-            }else {
+                showTeilnehmer.setText(name + SEPERATOR);
+            } else {
                 String setTeilnehmer = showTeilnehmer.getText();
-                showTeilnehmer.setText(setTeilnehmer + name+SEPERATOR);
+                showTeilnehmer.setText(setTeilnehmer + name + SEPERATOR);
             }
         }
     }
 
     @FXML
-    protected void onClickResetBtn() {}
+    protected void onClickResetBtn() {
+    }
 
     public int getRandomNumber(int max) {
         Random random = new Random();
         return random.nextInt(max);
     }
-
 }
