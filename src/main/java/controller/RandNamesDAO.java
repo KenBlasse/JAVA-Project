@@ -19,11 +19,13 @@ public class RandNamesDAO {
 
     public String time = "";
 
-    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
 
     private final String PATH = "save.csv";
 
     private final String SEPARATOR = ", ";
+
+    private String name = "";
 
     public void addNameList(String randName) {
         try {
@@ -34,8 +36,8 @@ public class RandNamesDAO {
     }
 
     public String getNameOnList(int randNr){
-        String name = randNamesList.get(randNr).getName();
-        return name;
+        return name = randNamesList.get(randNr).getName();
+
     }
     // Gibt die vollständige Namensliste zurück
     public void setAllNames(List<RandNames> list) {
@@ -83,11 +85,11 @@ public class RandNamesDAO {
             BufferedReader bReader = new BufferedReader(fileReader);
 
             // Erstes Lesen = Zeitstempelzeile
-            String ersteZeile = bReader.readLine();
-            if (ersteZeile != null && !ersteZeile.isEmpty()) {
-                String[] zeitLine = ersteZeile.split(SEPARATOR);
-                if (zeitLine.length > 0) {
-                    time = LocalDateTime.parse(zeitLine[0], formatter).format(formatter);
+            String firstLine = bReader.readLine();
+            if (firstLine != null && !firstLine.isEmpty()) {
+                String[] timeLine = firstLine.split(SEPARATOR);
+                if (timeLine.length > 0) {
+                    time = LocalDateTime.parse(timeLine[0], formatter).format(formatter);
                 }
             }
 

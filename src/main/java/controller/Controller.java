@@ -24,16 +24,16 @@ public class Controller {
 
     @FXML
     protected void onClickAddBtn() {
-        String addTeilnehmer = teilnehmer.getText();
+        String addParticipant = teilnehmer.getText();
         if (showTeilnehmer.getText().isEmpty()) {
-            showTeilnehmer.setText(addTeilnehmer + SEPARATOR);
+            showTeilnehmer.setText(addParticipant + SEPARATOR);
         } else {
-            String setTeilnehmer = showTeilnehmer.getText();
-            showTeilnehmer.setText(setTeilnehmer + addTeilnehmer + SEPARATOR);
+            String setParticipant = showTeilnehmer.getText();
+            showTeilnehmer.setText(setParticipant + addParticipant + SEPARATOR);
         }
 
-        if (showWinner.getText().isEmpty()) dao.addNameList(addTeilnehmer);
-        else dao.addNameList(addTeilnehmer);
+        if (showWinner.getText().isEmpty()) dao.addNameList(addParticipant);
+        else dao.addNameList(addParticipant);
 
         teilnehmer.setText("");
         teilnehmer.requestFocus();
@@ -70,7 +70,7 @@ public class Controller {
         }
 
         Alert winInfo = new Alert(Alert.AlertType.INFORMATION);
-        winInfo.setTitle("\uD83C\uDF89Winner");
+        winInfo.setTitle("\uD83C\uDF89 Winner");
         winInfo.setHeaderText(null);
         Label content = new Label("Gewonnen hat:\n" + winner);
         content.setStyle("-fx-font-size: 25px; -fx-text-fill: green;");
@@ -86,18 +86,18 @@ public class Controller {
 
     @FXML
     protected void onClickLoadBtn() {
-        List<RandNames> geladeneNamen = dao.load();
+        List<RandNames> loadedNames = dao.load();
         loaded.setText(dao.time);
         showTeilnehmer.clear();
         showWinner.clear();
-        dao.setAllNames(geladeneNamen);
+        dao.setAllNames(loadedNames);
         for (int j = 0; j < dao.getListSize(); j++) {
             String name = dao.getNameOnList(j);
             if (showTeilnehmer.getText().isEmpty()) {
                 showTeilnehmer.setText(name + SEPARATOR);
             } else {
-                String setTeilnehmer = showTeilnehmer.getText();
-                showTeilnehmer.setText(setTeilnehmer + name + SEPARATOR);
+                String setParticipant = showTeilnehmer.getText();
+                showTeilnehmer.setText(setParticipant + name + SEPARATOR);
             }
         }
     }
