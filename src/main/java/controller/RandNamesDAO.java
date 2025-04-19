@@ -111,7 +111,6 @@ public class RandNamesDAO {
                 }
             }
         }
-
         return list;
     }
 }
