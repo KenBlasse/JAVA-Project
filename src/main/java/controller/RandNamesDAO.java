@@ -1,15 +1,12 @@
 package controller;
 
 import model.RandNames;
-
 import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-
 import static java.time.LocalDateTime.*;
-
 
 public class RandNamesDAO {
     List<RandNames> randNamesList = new ArrayList<>();
