@@ -2,10 +2,7 @@ package controller;
 
 import model.RandNames;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -21,11 +18,9 @@ public class RandNamesDAO {
 
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
 
-    private final String PATH = "save.csv";
+    private final DateTimeFormatter saveDateFormat = DateTimeFormatter.ofPattern("yyyy_MM_dd_HH_mm_ss_");
 
     private final String SEPARATOR = ", ";
-
-    private String name = "";
 
     public void addNameList(String randName) {
         try {
@@ -36,81 +31,57 @@ public class RandNamesDAO {
     }
 
     public String getNameOnList(int randNr){
-        return name = randNamesList.get(randNr).getName();
-
-    }
-    // Gibt die vollständige Namensliste zurück
-    public void setAllNames(List<RandNames> list) {
-        randNamesList.clear();
-        randNamesList.addAll(list);
+        return randNamesList.get(randNr).getName();
     }
 
-    // Optional: Größe der Liste zurückgeben
     public int getListSize() {
         return randNamesList.size();
     }
 
-    public void save(){
+    public void saveData() {
+        String liste = now().format(formatter) + SEPARATOR + System.lineSeparator();
+        String date = now().format(saveDateFormat);
+        File saveDir = new File("saves");
 
-        FileWriter fileWriter = null;
-        try{
-            fileWriter = new FileWriter(PATH);
-            String liste;
-            liste= now().format(formatter)+SEPARATOR+System.lineSeparator();
+        if (!saveDir.exists()) {
+            saveDir.mkdirs();
+        }
+
+        File file = new File(saveDir, "save_" + date + ".csv");
+
+        try (FileWriter fileWriter = new FileWriter(file)) {
             fileWriter.write(liste);
             for (RandNames r : randNamesList) {
-                String randName = r.getName();
-                liste = randName + SEPARATOR + System.lineSeparator();
-                fileWriter.write(liste);
+                fileWriter.write(r.getName() + SEPARATOR + System.lineSeparator());
             }
-        }catch (IOException e){
-            System.err.println("Fehler: "+ e.getMessage());
-        }finally {
-            if (fileWriter != null) {
-                try{
-                    fileWriter.close();
-                }catch (IOException e){
-                    System.err.println("Fehler: "+ e.getMessage());
-                }
-            }
+            System.out.println("Gespeichert unter: " + file.getAbsolutePath());
+        } catch (IOException e) {
+            System.err.println("Fehler beim Speichern: " + e.getMessage());
         }
     }
 
-    ArrayList<RandNames> load() {
-        ArrayList<RandNames> list = new ArrayList<>();
-        FileReader fileReader = null;
-
-        try {
-            fileReader = new FileReader(PATH);
-            BufferedReader bReader = new BufferedReader(fileReader);
-
-            // Erstes Lesen = Zeitstempelzeile
-            String firstLine = bReader.readLine();
-            if (firstLine != null && !firstLine.isEmpty()) {
-                String[] timeLine = firstLine.split(SEPARATOR);
-                if (timeLine.length > 0) {
-                    time = LocalDateTime.parse(timeLine[0], formatter).format(formatter);
+    public void loadData(File file) {
+        randNamesList.clear();
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String ersteZeile = reader.readLine(); // Zeit
+            if (ersteZeile != null) {
+                String[] parts = ersteZeile.split(SEPARATOR);
+                if (parts.length > 0) {
+                    time = LocalDateTime.parse(parts[0], formatter).format(formatter);
                 }
             }
 
-            // Dann Teilnehmer einlesen
-            String readLine;
-            while ((readLine = bReader.readLine()) != null) {
-                String[] line = readLine.split(SEPARATOR);
-                list.add(new RandNames(line[0]));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(SEPARATOR);
+                randNamesList.add(new RandNames(parts[0]));
             }
-
         } catch (IOException e) {
-            System.err.println("Fehler: " + e.getMessage());
-        } finally {
-            if (fileReader != null) {
-                try {
-                    fileReader.close();
-                } catch (IOException e) {
-                    System.err.println("Fehler: " + e.getMessage());
-                }
-            }
+            System.err.println("Fehler beim Laden: " + e.getMessage());
         }
-        return list;
+    }
+
+    public void resetList(){
+        randNamesList.clear();
     }
 }

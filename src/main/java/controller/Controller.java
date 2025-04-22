@@ -3,9 +3,10 @@ package controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Label;
-import model.RandNames;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import java.io.File;
 
-import java.util.List;
 import java.util.Random;
 
 public class Controller {
@@ -42,7 +43,17 @@ public class Controller {
     @FXML
     protected void onClickStartBtn() {
 
-        if (dao.getListSize() == 0 || showWinner.getText().split(SEPARATOR).length >= dao.getListSize()) {
+        if (dao.getListSize() == 0 ) {
+            Alert gameOver = new Alert(Alert.AlertType.INFORMATION);
+            gameOver.setTitle("Keine Teilnehmer vorhanden");
+            gameOver.setHeaderText(null);
+            Label msg = new Label("Die Liste ist leer");
+            msg.setStyle("-fx-font-size: 18px; -fx-text-fill: red;");
+            msg.setWrapText(true);
+            gameOver.getDialogPane().setContent(msg);
+            gameOver.showAndWait();
+            return;
+        } else if (showWinner.getText().split(SEPARATOR).length >= dao.getListSize()) {
             Alert gameOver = new Alert(Alert.AlertType.INFORMATION);
             gameOver.setTitle("Game Over");
             gameOver.setHeaderText(null);
@@ -81,23 +92,33 @@ public class Controller {
 
     @FXML
     protected void onClickSaveBtn() {
-        dao.save();
+        dao.saveData();
     }
 
     @FXML
     protected void onClickLoadBtn() {
-        List<RandNames> loadedNames = dao.load();
-        loaded.setText(dao.time);
-        showTeilnehmer.clear();
-        showWinner.clear();
-        dao.setAllNames(loadedNames);
-        for (int j = 0; j < dao.getListSize(); j++) {
-            String name = dao.getNameOnList(j);
-            if (showTeilnehmer.getText().isEmpty()) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("CSV-Datei laden");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV-Dateien", "*.csv"));
+
+        File saveDir = new File("saves");
+        if (saveDir.exists()) {
+            fileChooser.setInitialDirectory(saveDir);
+        }
+
+        File selectedFile = fileChooser.showOpenDialog(new Stage());
+
+        if (selectedFile != null){
+            dao.loadData(selectedFile);
+            showTeilnehmer.clear();
+            for (int j = 0; j < dao.getListSize(); j++){
+                String name = dao.getNameOnList(j);
+                if (showTeilnehmer.getText().isEmpty()) {
                 showTeilnehmer.setText(name + SEPARATOR);
-            } else {
-                String setParticipant = showTeilnehmer.getText();
-                showTeilnehmer.setText(setParticipant + name + SEPARATOR);
+                    } else {
+                        String setParticipant = showTeilnehmer.getText();
+                        showTeilnehmer.setText(setParticipant + name + SEPARATOR);
+                    }
             }
         }
     }
@@ -107,6 +128,7 @@ public class Controller {
         showTeilnehmer.clear();
         showWinner.clear();
         loaded.setText(null);
+        dao.resetList();
     }
 
     public int getRandomNumber(int max) {
