@@ -17,7 +17,7 @@ It also provides 2 methods:
 LoadData -> loads saved data as CSV :white_check_mark:  
 SavaData -> saves data as CSV :white_check_mark:  
 Model class(es) :white_check_mark:   
-Saves one data set each and makes the individual values accessible via getters:white_check_mark:  
+Saves one data set each and makes the individual values accessible via getters :white_check_mark:  
 is managed by the DataAccessObject :white_check_mark:  
 Each program calculates and creates something according to the task description :white_check_mark:   
 The data/results should be able to be saved and loaded :white_check_mark:  
