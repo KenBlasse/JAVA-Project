@@ -110,7 +110,7 @@ public class Controller {
 
         if (selectedFile != null){
             dao.loadData(selectedFile);
-            showTeilnehmer.clear();
+            loaded.setText(dao.time);
             for (int j = 0; j < dao.getListSize(); j++){
                 String name = dao.getNameOnList(j);
                 if (showTeilnehmer.getText().isEmpty()) {

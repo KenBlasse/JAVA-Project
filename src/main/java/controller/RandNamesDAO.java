@@ -67,7 +67,6 @@ public class RandNamesDAO {
                     time = LocalDateTime.parse(parts[0], formatter).format(formatter);
                 }
             }
-
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(SEPARATOR);
