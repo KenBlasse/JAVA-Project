@@ -10,7 +10,7 @@ import static java.time.LocalDateTime.*;
 
 public class RandNamesDAO {
     List<RandNames> randNamesList = new ArrayList<>();
-
+    // Variablen zum Speichern der Zeit vor dem Dateinamen und in der Liste
     public String time = "";
 
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
@@ -39,7 +39,7 @@ public class RandNamesDAO {
         String liste = now().format(formatter) + SEPARATOR + System.lineSeparator();
         String date = now().format(saveDateFormat);
         File saveDir = new File("saves");
-
+        // Anlegen des Ordners für die Save-Dateien
         if (!saveDir.exists()) {
             saveDir.mkdirs();
         }

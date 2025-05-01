@@ -25,6 +25,7 @@ public class Controller {
 
     @FXML
     protected void onClickAddBtn() {
+        // Teilnehmer hinzufügen
         String addParticipant = teilnehmer.getText();
         if (showTeilnehmer.getText().isEmpty()) {
             showTeilnehmer.setText(addParticipant + SEPARATOR);
@@ -37,12 +38,13 @@ public class Controller {
         else dao.addNameList(addParticipant);
 
         teilnehmer.setText("");
+        // nach Drücken des Buttons, Fokus wieder auf Eingabefeld, um direkt weiter eingeben zu können
         teilnehmer.requestFocus();
     }
 
     @FXML
     protected void onClickStartBtn() {
-
+        // Wenn Liste leer, dann Hinweise darauf
         if (dao.getListSize() == 0 ) {
             Alert gameOver = new Alert(Alert.AlertType.INFORMATION);
             gameOver.setTitle("Keine Teilnehmer vorhanden");
@@ -53,6 +55,7 @@ public class Controller {
             gameOver.getDialogPane().setContent(msg);
             gameOver.showAndWait();
             return;
+        // Wenn alle Teilnehmer gezogen wurde, Hinweis darauf
         } else if (showWinner.getText().split(SEPARATOR).length >= dao.getListSize()) {
             Alert gameOver = new Alert(Alert.AlertType.INFORMATION);
             gameOver.setTitle("Game Over");
@@ -90,17 +93,17 @@ public class Controller {
         winInfo.showAndWait();
     }
 
-    @FXML
+    @FXML // speichern mit Datum
     protected void onClickSaveBtn() {
         dao.saveData();
     }
 
-    @FXML
+    @FXML // laden einer save File über Filechooser
     protected void onClickLoadBtn() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("CSV-Datei laden");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV-Dateien", "*.csv"));
-
+        // Filechooser öffnet direkt den saves Ordner
         File saveDir = new File("saves");
         if (saveDir.exists()) {
             fileChooser.setInitialDirectory(saveDir);
@@ -123,7 +126,7 @@ public class Controller {
         }
     }
 
-    @FXML
+    @FXML // löscht alle Daten
     protected void onClickResetBtn() {
         showTeilnehmer.clear();
         showWinner.clear();
