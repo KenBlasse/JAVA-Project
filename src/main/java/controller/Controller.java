@@ -110,7 +110,8 @@ public class Controller {
         }
 
         File selectedFile = fileChooser.showOpenDialog(new Stage());
-
+        showTeilnehmer.clear();
+        showWinner.clear();
         if (selectedFile != null){
             dao.loadData(selectedFile);
             loaded.setText(dao.time);
