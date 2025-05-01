@@ -1,38 +1,96 @@
+# ==========================
+# Java/Maven-Project Ignore
+# ==========================
+
+# Build-Ordner
 target/
-!.mvn/wrapper/maven-wrapper.jar
+build/
+out/
+
+# Maven Wrapper
+.mvn/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-### IntelliJ IDEA ###
-.idea/modules.xml
-.idea/jarRepositories.xml
-.idea/compiler.xml
-.idea/libraries/
+# Compilierte Klassen & temporäre Dateien
+*.class
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+
+# ==========================
+# IDEs
+# ==========================
+
+# IntelliJ IDEA
+.idea/
 *.iws
 *.iml
 *.ipr
 
-### Eclipse ###
-.apt_generated
+# IntelliJ specific
+.idea/modules.xml
+.idea/jarRepositories.xml
+.idea/compiler.xml
+.idea/libraries/
+
+# Eclipse
+.apt_generated/
 .classpath
 .factorypath
 .project
-.settings
+.settings/
 .springBeans
-.sts4-cache
+.sts4-cache/
 
-### NetBeans ###
+# NetBeans
 /nbproject/private/
 /nbbuild/
 /dist/
 /nbdist/
 /.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
 
-### VS Code ###
+# VS Code
 .vscode/
 
-### Mac OS ###
+# ==========================
+# Betriebssysteme
+# ==========================
+
+# macOS
 .DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# ==========================
+# Sonstiges
+# ==========================
+
+# Backup- und temporäre Dateien
+*.~*
+*.bak
+*.orig
+
+# draw.io temporäre Dateien
+*.drawio~*
+
+# ==========================
+# Dein Projekt
+# ==========================
+
+# saves/ darf NICHT ignoriert werden
+# (z. B. um Verzeichnisstruktur zu behalten)
+!saves/
+
+# ==========================
+# UML-Dateien (nicht ignorieren!)
+# ==========================
+
+!UML/
+!UML/*.drawio
+!UML/*.xml
