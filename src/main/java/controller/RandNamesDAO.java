@@ -8,6 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 import static java.time.LocalDateTime.*;
 
+/**
+ * Diese Klasse verwaltet die Teilnehmerliste für das Gewinnspiel.
+ * Sie bietet Funktionen zum Hinzufügen, Speichern und Laden der Namen,
+ * einschließlich Zeitstempelverwaltung und Dateiorganisation.
+ */
+
 public class RandNamesDAO {
     List<RandNames> randNamesList = new ArrayList<>();
     // Variablen zum Speichern der Zeit vor dem Dateinamen und in der Liste

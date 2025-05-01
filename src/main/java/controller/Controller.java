@@ -9,6 +9,12 @@ import java.io.File;
 
 import java.util.Random;
 
+/**
+ * JavaFX-Controllerklasse für die Benutzeroberfläche des NameRandomizWinner-Projekts.
+ * Steuert die Interaktionen zwischen GUI und Datenzugriff (RandNamesDAO).
+ * Enthält Event-Handler für Buttons wie „Hinzufügen“, „Start“, „Speichern“, „Laden“ und „Zurücksetzen“.
+ */
+
 public class Controller {
 
     static String SEPARATOR = ", ";

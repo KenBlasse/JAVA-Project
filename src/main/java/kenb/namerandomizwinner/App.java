@@ -7,6 +7,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Einstiegspunkt der JavaFX-Anwendung.
+ * Diese Klasse lädt die Hauptoberfläche aus der FXML-Datei
+ * und startet die Benutzeroberfläche des Programms.
+ */
+
 public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {

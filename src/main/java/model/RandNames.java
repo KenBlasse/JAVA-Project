@@ -2,12 +2,18 @@ package model;
 
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Repräsentiert einen einzelnen Teilnehmer des Gewinnspiels.
+ * Diese Klasse enthält ausschließlich den Namen und bietet Zugriffsmethoden,
+ * um den Namen zu setzen oder auszulesen.
+ */
+
 public class RandNames implements CharSequence {
 
     private String name;
-
+    // nutzt direkt den Setter mit Validierung
     public RandNames(String name) {
-        setName(name); // nutzt direkt den Setter mit Validierung
+        setName(name);
     }
 
     public String getName() {
