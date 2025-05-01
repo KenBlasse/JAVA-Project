@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 public class RandNames implements CharSequence {
 
     private String name;
-    // nutzt direkt den Setter mit Validierung
+
     public RandNames(String name) {
         setName(name);
     }
